@@ -1,0 +1,70 @@
+syntax = "proto3"; //指定protobuf语法版本
+
+package NKG.NetWork;
+
+/**
+ * 邮件信息请求
+ */
+message MailMsgRequest{
+}
+/**
+ * 邮件信息 响应
+ */
+message MailMsgResponse{
+  repeated Mail mails = 1;
+}
+
+/**
+ * 操作邮件 请求
+ */
+message MailOptRequest{
+  string mailId = 1;
+  int32 optType = 2;//1-读取 2-领取 3-删除
+}
+/**
+ * 操作邮件 响应
+ */
+message MailOptResponse{
+  string mailId = 1;
+  int32 status = 2;
+}
+
+/**
+ *一键操作 请求
+ */
+message MailReadOneKeyRequest{
+  int32 optType = 1;//1-读取 2-领取 3-删除
+}
+/**
+ * 一键操作 响应
+ */
+message MailReadOneKeyResponse{
+  map<string, int32> mailId = 1;//key-邮件id 邮件状态
+}
+
+/**
+ * 通知有新邮件
+ */
+message NoticeNewMailResponse{
+
+}
+
+message Mail{
+  string id = 1;//邮件唯一id
+  int32 status = 2;//邮件状态 1-未读 2-已读 3-已读未领取 4-已读领取 5-删除
+  int32 mailType = 3;//邮件类型
+  int32 mailConfigId = 4;//邮件表id
+  int64 sendTime = 5;//邮件发送时间
+  int64 expireTime = 6;//过期时间
+  repeated MailItem items = 7;//奖励
+  string mailTitle = 8;//邮件标题
+  string mailContent = 9;//邮件内容
+  string sender = 10;//发送者
+  repeated string params = 11;//功能邮件参数
+}
+
+message MailItem{
+  int32 itemType = 1;
+  int32 itemId = 2;
+  int32 itemNum = 3;
+}

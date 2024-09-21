@@ -1,0 +1,276 @@
+syntax = "proto3"; //指定protobuf语法版本
+
+import "CommonBody.proto";
+
+package NKG.NetWork;
+
+/**
+ * 进入游戏 请求
+ */
+message EnterGameMsgRequest{
+
+}
+
+/**
+ * 进入游戏 响应
+ */
+message EnterGameMsgResponse{
+  int64 playerId = 1; // 角色id
+  string nickName = 2; // 昵称
+  int32 sex = 3;
+  int64 age = 4;
+  int64 maxAge = 5;//寿元上限
+  int32 curStageType = 6;
+  repeated PlayerStage playerStages = 7;
+  int32 title = 8;//称号
+  int32 headFrame = 9;//头像框
+  int32 avatar = 10;//头像
+  int32 fashion = 11;//时装
+  map<int32, int64> titleMap = 12;//称号集合key-id value-有效期
+  repeated int32 avatars = 13;//头像集合
+  repeated int32 headFrames = 14;//头像框集合
+  repeated int32 fashions = 15;//时装集合
+  map<int32, FunctionInfo> functions = 16;//功能集合
+  map<string, string> clientData =  17;//客户端数据
+  int64 dayRefreshDate = 18;//下次刷新时间
+  int64 monthRefreshDate = 19;//下次月刷新时间
+  int64 weekRefreshData = 20;//下次周刷新时间
+  int64 createTime = 21;//创建角色时间
+  int64 nextAddAgeTime = 22;//下次增加年龄时间
+  Bag bag = 23;//道具
+  repeated int32 lingGens = 24;//灵根集合
+  map<int32, int64> totalAttrs = 100;//玩家属性集合
+}
+/**
+ * 查看玩家信息 请求
+ */
+message PlayerMsgRequest{
+  int64 playerId = 1;
+}
+
+/**
+ * 查看玩家信息 响应
+ */
+message PlayerMsgResponse{
+  PlayerSimple simple = 1; // 角色
+}
+
+
+/**
+ * 修改玩家修炼类型 请求
+ */
+message PlayerStageChangeRequest{
+  int32 curStageType = 1;
+}
+
+/**
+ * 修改玩家修炼类型 响应
+ */
+message PlayerStageChangeResponse{
+  int32 curStageType = 1; // 角色
+}
+
+
+/**
+ * 玩家年龄刷新
+ */
+message AgeRefreshRequest{
+}
+
+/**
+ * 玩家年龄刷新 响应
+ */
+message AgeRefreshResponse{
+  int32 age = 1;//年龄
+  int64 nextAddAgeTime = 2;
+}
+
+/**
+ * 通知玩家年龄变更 通知
+ */
+message NoticeAgeResponse{
+  int32 age = 1;//寿元
+  int64 nextAddAgeTime = 2;
+  int32 maxAge = 3;
+}
+
+
+/**
+ * 选择灵根(上线必须操作)
+ */
+message ChooseLingGenRequest{
+  int32 id = 1;//灵根id
+}
+
+/**
+ * 选择灵根 响应
+ */
+message ChooseLingGenResponse{
+  int32 id = 1;//灵根id
+}
+
+/**
+ * 灵根增加 通知
+ */
+message NoticeLingGenResponse{
+  repeated int32 id = 1;
+}
+
+
+/**
+ * 功能解锁等功能信息通知
+ */
+message NoticeFunctionUpdateResponse{
+  map<int32, FunctionInfo> functions = 1; //需要更新的功能集合
+}
+
+
+/**
+ * 道具更新通知
+ */
+message NoticePropUpdateResponse{
+  repeated Prop prop = 1; // 更新的道具
+  int32 getWay = 2;//获得途径
+}
+/**
+ * 道具获取通知 弹窗
+ */
+message NoticePropRewardResponse{
+  repeated Prop prop = 1; // 道具获取道具
+  int32 getWay = 2;//获得途径
+}
+/**
+ * 通知更新道具背包数量
+ */
+message NoticeBagNumResponse{
+  int32 bagNum = 1;
+}
+
+
+/**
+ * 修改昵称请求
+ */
+message ModifyNickNameRequest{
+  string nickName = 1;//修改昵称
+}
+
+/**
+ * 修改昵称请求 响应
+ */
+message ModifyNickNameResponse{
+  string nickName = 1;//修改昵称
+}
+
+
+/**
+ * 修改称号请求
+ */
+message ModifyTitleRequest{
+  int32 id = 1;
+}
+
+/**
+ * 修改称号请求 响应
+ */
+message ModifyTitleResponse{
+  int32 id = 1;
+}
+
+
+/**
+ * 修改头像框请求
+ */
+message ModifyHeadFrameRequest{
+  int32 id = 1;
+}
+
+/**
+ * 修改头像框请求 响应
+ */
+message ModifyHeadFrameResponse{
+  int32 id = 1;
+}
+
+/**
+ * 修改头像请求
+ */
+message ModifyAvatarRequest{
+  int32 id = 1;
+}
+
+/**
+ * 修改头像请求 响应
+ */
+message ModifyAvatarResponse{
+  int32 id = 1;
+}
+
+
+/**
+ * 修改时装请求
+ */
+message ModifyFashionRequest{
+  int32 id = 1;
+}
+
+/**
+ * 修改时装请求 响应
+ */
+message ModifyFashionResponse{
+  int32 id = 1;
+}
+
+/**
+ * 称号更新
+ */
+message NoticeUpdateTitleResponse{
+  int32 id      = 1;
+  int64 endTime = 2;
+  int32 useId   = 3;
+  int32 optType = 4;//操作类型 1-添加 2-删除
+}
+/**
+ * 头像框更新
+ */
+message NoticeUpdateHeadFrameResponse{
+  repeated int32  id = 1;//增加的头像框集合
+}
+/**
+ * 时装更新
+ */
+message NoticeUpdateFashionResponse{
+  repeated int32  id = 1;//增加的时装集合
+}
+/**
+ * 头像更新
+ */
+message NoticeUpdateAvatarResponse{
+  repeated int32  id = 1;//增加的头像集合
+}
+
+/**
+ * 客户端数据，只做更新，不错任何逻辑
+ */
+message UpdateClientDataRequest{
+  map<string, string> clientData = 1;//更新的客户端数据
+}
+
+message UpdateClientDataResponse{
+}
+
+
+/**
+ * 礼包码请求
+ */
+message GiftCodeRequest{
+  string code = 1;
+}
+
+/**
+ * 礼包码请求 响应
+ */
+message GiftCodeResponse{
+}
+
+
+

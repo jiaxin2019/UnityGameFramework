@@ -1,0 +1,161 @@
+syntax = "proto3"; //指定protobuf语法版本
+
+package NKG.NetWork;//包名
+
+/**
+ * 进入冒险 请求
+ */
+message EnterAdventureRequest{
+  int32 type = 1; // 战斗类型 1 = 竞技场， 2 = 关卡， 3 = 首领, 4 = 宗门首领
+  int64 enemyPlayerId = 2; // 如果竞技场，需要传敌人角色id
+}
+
+/**
+ * 进入冒险 响应
+ */
+message EnterAdventureResponse{
+  repeated HeroInfo partnerHeroInfo = 1; // 伙伴英雄信息
+  repeated HeroInfo enemyHeroInfo = 2; // 敌人英雄信息
+  repeated BattleProcess battleProcess = 3; // 战斗过程
+  int32 battleResult = 4; // 战斗结果
+  repeated HeroBattleResult partnerHeroResult = 5; // 伙伴英雄战斗结果
+  repeated HeroBattleResult enemyHeroResult = 6; // 敌人英雄战斗结果
+  repeated BattleReward battleReward = 7; // 战斗奖励
+  PlayerRankScore partnerRankScore = 8; // 己方积分排名信息
+  PlayerRankScore enemyRankScore = 9; // 敌方积分排名信息
+  int32 type = 10; // 战斗类型 1 = 竞技场， 2 = 关卡
+  BattleData battleData = 11; // 战斗数据（特殊需要）
+  int64 targetId = 12; // 目标id
+}
+
+/**
+ * 战斗数据（特殊需要）
+ */
+message BattleData{
+  int64 enemyHeroTotalDamageValue = 1; // 敌人累计总受伤害
+  int64 oldScore = 2; // 旧积分
+  int64 newScore = 3; // 新积分
+}
+
+/**
+ * 玩家增减积分排名信息
+ */
+message PlayerRankScore{
+  int32 score = 1; // 最新积分
+  int32 addScore = 2; // 增减积分
+  int32 rank = 3; // 最新排名
+  int32 addRank = 4; // 增减排名
+}
+
+/**
+ * 英雄战斗结果
+ */
+message HeroBattleResult{
+  int64 life = 1; // 生命值
+  int32 status = 2; // 英雄状态
+  int64 playerId = 3; 
+}
+
+
+/**
+ * 战斗英雄信息
+ */
+message HeroInfo{
+  int64 id = 1; // id
+  int32 type = 2; // 英雄类型
+  int64 life = 3; // 生命值
+  string name = 4; // 姓名
+  int32 level = 5; // 等级
+  string headUrl = 6; // 头像路径
+  int32 heroId = 7; // 英雄id
+  string zongMenName = 8; // 宗门名称
+  map<int32, int32> heroDressUp = 9; // 英雄装扮（key = 位置， value = 装备模板id）
+  int32 faXiangId = 10; // 法相id
+  repeated XianYou xianYous = 11; // 仙友集合
+  int32 stand = 12; // 站位
+  int32 avatarId = 13; // 头像id
+  int32 headFrame = 14; // 头像框
+}
+
+/**
+ * 仙友信息
+ */
+message XianYou{
+  int32 id = 1; // 仙友id
+  int32 level = 2; // 等级
+  int32 skillId = 3; // 技能id
+  int32 location = 4; // 位置
+}
+
+/**
+ * 战斗过程
+ */
+message BattleProcess{
+  int32 round = 1; // 第几回合
+  int64 attackId = 2; // 攻击方id
+  int32 attackStatus = 3; // 攻击方状态
+  int32 attackType = 4; // 攻击类型 近战、远程
+  int32 skillId = 5; // 技能id
+  bool doubleAtkStatus = 6; // 是否连击
+  bool strikeStatus = 7; // 是否反击
+  int64 lifestealValue = 8; // 吸血值
+  repeated BattleBuff buffList = 9; // buff集合
+  repeated int32 triggerXianYouId = 10; // 触发的仙友id集合
+  repeated TargetInfo targetInfo = 11; // 目标的信息
+}
+
+/**
+ * 目标
+ */
+message TargetInfo{
+  int64 targetId = 1; // 目标方id
+  int32 targetStatus = 2; // 目标方状态 0=正常、1=被击晕、2=死亡
+  int32 struckType = 3; // 受击类型 普通攻击、闪避、被暴击
+  int64 damageValue = 4; // 伤害值
+  repeated int32 triggerXianYouId = 5; // 触发的仙友id集合
+  int64 lifestealValue = 6; // 吸血值
+}
+
+/**
+ * 战斗buff信息
+ */
+message BattleBuff{
+  int32 effectId = 1; // 效果id
+  int32 surplusRound = 2; // 剩余回合数
+  int32 currentOverlays = 3; // 当前层数
+  int64 heroId = 4; // 英雄id
+  int32 type = 5; // 1=新增， 2=消失，3=更新
+}
+
+/**
+ * 战斗奖励
+ */
+message BattleReward{
+  int32 id = 1; // 物品模板id
+  int32 count = 2; // 物品数量
+}
+
+/**
+ * 战斗回放 请求
+ */
+message BattleReplayRequest{
+  int64 battleProcessId = 1; // 战斗流程id
+}
+
+/**
+ * 战斗回放 响应
+ */
+message BattleReplayResponse{
+  repeated HeroInfo partnerHeroInfo = 1; // 伙伴英雄信息
+  repeated HeroInfo enemyHeroInfo = 2; // 敌人英雄信息
+  repeated BattleProcess battleProcess = 3; // 战斗过程
+  int32 battleResult = 4; // 战斗结果
+  repeated HeroBattleResult partnerHeroResult = 5; // 伙伴英雄战斗结果
+  repeated HeroBattleResult enemyHeroResult = 6; // 敌人英雄战斗结果
+  repeated BattleReward battleReward = 7; // 战斗奖励
+  PlayerRankScore partnerRankScore = 8; // 己方积分排名信息
+  PlayerRankScore enemyRankScore = 9; // 敌方积分排名信息
+  int32 type = 10; // 战斗类型 1 = 竞技场， 2 = 关卡
+  BattleData battleData = 11; // 战斗数据（特殊需要）
+  int64 targetId = 12; // 目标id
+}

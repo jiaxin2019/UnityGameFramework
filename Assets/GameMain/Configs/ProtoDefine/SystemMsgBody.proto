@@ -1,0 +1,54 @@
+syntax = "proto3"; //指定protobuf语法版本
+
+import "CommonBody.proto";
+
+package NKG.NetWork;
+/**
+ * GM请求
+ */
+message GMRequest{
+  int32 gmType = 1;
+  string gmStr = 2;
+}
+
+/**
+ * GM请求 响应
+ */
+message GMResponse{
+}
+
+
+/**
+ * 封禁 响应
+ */
+message NoticeUserCloseDownResponse{
+  int32 closeDownType = 1; // 封禁类型 1=封号，2=禁言
+  int32 accountType = 2; // 用户类型 1=openid，2=palyer
+  string startDate = 3; // 开始时间
+  string endDate = 4; // 结束时间
+  string cause = 5; // 封禁原因
+}
+/**
+ * 系统维护通知
+ */
+message NoticeSystemMaintenanceResponse{
+  string title = 1;
+  string message = 2;
+  string endDate = 3;
+  string startDate = 4;
+}
+
+/**
+ * 有公告更新
+ */
+message NoticeUpdateBulletinResponse{
+  bool hasNew = 1;//是否有新公告
+}
+
+/**
+ * 跑马灯
+ */
+message NoticeHorseResponse{
+  int32 horseId = 1;//广播
+  repeated string params = 2;//广播参数
+}

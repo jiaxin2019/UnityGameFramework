@@ -1,0 +1,12 @@
+syntax = "proto3"; //指定protobuf语法版本
+
+package NKG.NetWork;
+
+
+message ConfirmMsgRequestBody{
+	string token = 1;
+}
+message ConfirmMsgResponseBody{
+	string secretKey = 1;
+}
+

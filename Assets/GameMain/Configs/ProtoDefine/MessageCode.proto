@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+option java_outer_classname = "MessageCode";
+package NKG.NetWork;
+enum MessageCodeEnum //枚举消息类型
+{
+  ENUM_CODE_UNSPECIFIED = 0; //proto3版本中，首成员必须为0，成员不应有相同的值
+  eConfirmMsgRequestBody = 1; // 连接认证
+  eHeartbeatMsgRequestBody = 2; // 心跳检测
+
+  eGMResponse = 1000;//GM请求
+
+  //系统相关
+  eNoticeSystemMaintenanceResponse = 2001;//通知公告
+  eNoticeUpdateBulletinResponse = 2002;//公告更新
+  eNoticeHorseResponse = 2003;//跑马灯通知
+
+  //玩家10XXX
+  eEnterGameMsgResponse = 10001; // 玩家请求进入游戏
+  ePlayerMsgResponse = 10002;// 查看玩家信息
+  ePlayerStageChangeResponse = 10003;//修改玩家修炼类型
+  eAgeRefreshResponse = 10004;//年龄刷新
+  eChooseLingGenResponse = 10005;//选择灵根
+  eModifyNickNameResponse = 10006;//修改昵称
+  eModifyTitleResponse = 10007;//修改称号
+  eModifyHeadFrameResponse = 10008;//修改头像框
+  eModifyAvatarResponse = 10009;//修改头像
+  eModifyFashionResponse = 10010;//修改时装
+  eUpdateClientDataResponse = 10011;//更新客户端
+  eGiftCodeResponse = 10012;//礼包码请求
+
+  eNoticeFunctionUpdateResponse = 10050;//通知功能开启
+  eNoticeAgeResponse = 10051;//通知年龄更新
+  eNoticeLingGenResponse = 10052;//通知灵根变化
+  eNoticePropUpdateResponse = 10053;//通知道具更新
+  eNoticePropRewardResponse = 10054;//通知奖励弹窗
+  eNoticeBagNumResponse = 10055;//通知道具背包数量变化
+  eNoticeUpdateTitleResponse = 10056;//更新称号
+  eNoticeUpdateHeadFrameResponse = 10057;//更新头像框
+  eNoticeUpdateFashionResponse = 10058;//更新时装
+  eNoticeUpdateAvatarResponse = 10059;//更新头像
+
+  //邮件11XXX
+  eMailMsgResponse = 11001;//获取邮件信息
+  eMailOptResponse = 11002;//操作邮件
+  eMailReadOneKeyResponse = 11003;//一键操作邮件
+
+  eNoticeNewMailResponse = 11050;//通知有新邮件
+
+  //im 聊天12XXX
+  JoinImChannelResponse = 12001;//加入聊天频道
+  eSendChatMsgResponse = 12002; //发送聊天
+  OutImChannelResponse = 12003; // 退出聊天频道
+
+  eNoticeChatMsgResponse = 12050;//聊天通知
+
+
+}
+

@@ -1,0 +1,49 @@
+syntax = "proto3"; //指定protobuf语法版本
+
+package NKG.NetWork;
+
+/**
+ * 任务信息
+ */
+message Task{
+  int32 taskId = 1;  //任務id
+  int32 process = 2; //任務進度
+  int32 status = 3;  //任務狀態 0-進行中 1-完成待領取 2-已領取
+}
+
+message FunctionInfo{
+  int32 id = 1; //功能ID
+  bool unlock = 2; //是否解锁
+}
+/**
+ * 玩家简单信息
+ */
+message PlayerSimple{
+  int64 playerId = 1; // 角色id
+  string nickName = 2; // 昵称
+  int32 sex = 3;
+  int64 age = 4;
+  int64 maxAge = 5;
+  repeated PlayerStage playerStages = 6;
+  int32 title = 7;//称号
+  int32 headFrame = 8;//头像框
+  int32 avatar = 9;//头像
+  int32 fashion = 10;//时装
+  map<int32, FunctionInfo> functions = 11;//功能集合
+  repeated int32 lingGens = 12;//灵根集合
+  map<int32, int64> totalAttrs = 100;//玩家属性集合
+}
+message Prop{
+  int32 id = 1;
+  int64 num = 2;
+}
+
+message PlayerStage{
+  int32 type = 1;
+  int32 stage = 2;//境界
+  int32 level = 3;//重
+}
+message Bag{
+  int32 bagNum = 1;
+  repeated Prop props = 2;//道具集合
+}

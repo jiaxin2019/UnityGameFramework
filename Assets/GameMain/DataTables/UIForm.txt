@@ -1,0 +1,21 @@
+#	场景配置表							
+#	Id		AssetName	UIGroupName	AllowMultiInstance	PauseCoveredUIForm	UIGroupId	AssetId
+#	int		string	string	bool	bool	int	int
+#	界面编号	备注	资源名称	界面组名称	是否允许多个界面实例	是否暂停被其覆盖的界面	界面组Id	资源Id
+	1	测试界面	TestForm	Default	FALSE	TRUE	1001	1001
+	2	热更新新增界面	TestForm2	Default	FALSE	TRUE	1001	1002
+	3	登录界面	LoginView	Default	FALSE	TRUE	1001	1003
+	4	主UI界面	MainUIForm	Default	FALSE	TRUE	1001	1004
+	100	主菜单	MenuForm	Default	FALSE	TRUE	1001	1005
+	101	设置	SettingForm	Default	FALSE	TRUE	1001	1006
+	102	关于	AboutForm	Default	FALSE	TRUE	1001	1007
+	103	修行	XiuXingForm	Default	FALSE	TRUE	1001	1008
+	104	渡劫	XiuXingDujieForm	Default	FALSE	TRUE	1001	1009
+	105	渡劫 成功	XiuXingDjSucForm	Default	FALSE	TRUE	1001	1010
+	106	渡劫 失败	XiuXingDjFailForm	Default	FALSE	TRUE	1001	1011
+	107	破镜 成功	XiuXingPjSucForm	Default	FALSE	TRUE	1001	1012
+	108	破镜 失败	XiuXingPjFailForm	Default	FALSE	TRUE	1001	1013
+	109	引气 成功	XiuXingYqSucForm	Default	FALSE	TRUE	1001	1014
+	110	引气 失败	XiuXingYqFailForm	Default	FALSE	TRUE	1001	1015
+	111	入定	XiuXingRdSucForm	Default	FALSE	TRUE	1001	1016
+	112	提示弹窗	DialogForm	Default	FALSE	TRUE	1001	1017

@@ -1,0 +1,24 @@
+syntax = "proto3"; //指定protobuf语法版本
+import "CommonBody.proto";
+package NKG.NetWork;
+
+/**
+ * 道具更新通知
+ */
+message NoticeItemUpdateResponse{
+  repeated Item prop = 1; // 更新的道具
+  int32 getWay = 2;//获得途径
+}
+/**
+ * 道具获取通知 弹窗
+ */
+message NoticeItemRewardResponse{
+  repeated Item prop = 1; // 道具获取道具
+  int32 getWay = 2;//获得途径
+}
+/**
+ * 通知更新道具背包数量
+ */
+message NoticeBagNumResponse{
+  int32 bagNum = 1;
+}

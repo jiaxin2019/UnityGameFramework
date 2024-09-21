@@ -1,0 +1,112 @@
+syntax = "proto3"; //指定protobuf语法版本
+
+import "CommonBody.proto";
+package NKG.NetWork;
+enum IMGroupEnum{
+  NONE = 0; //
+  ALL = 1; // 全服
+  ONE_SERVER = 2; // 本服
+  ZONG_MEN = 3; // 宗门
+  MANY_SERVER = 4; // 跨服
+}
+
+enum MsgTypeEnum{
+  MSG = 0; // 消息
+  FEN_XIANG = 1; // 分享
+  GONG_GAO = 2; // 公告
+}
+
+/**
+ * 发送聊天 请求
+ */
+message SendChatMsgRequest{
+  PlayerSimple sendPlayer = 1; // 发送者信息
+  string msg = 2; // 消息
+  IMGroupEnum group = 3; // 分组 1=全服，2=本服，3=宗门，4=跨服
+  MsgTypeEnum msgType = 4; // 消息类型
+}
+
+/**
+ * 发送聊天 响应
+ */
+message SendChatMsgResponse{
+  int64 nextSendTime = 1; // 下一次发送时间
+  int32 creditPoints = 2; // 信用分
+  int32 timeLag = 3; // 时间间隔
+  ForbidSpeak forbidSpeak = 4; // 禁言信息
+}
+
+/**
+ * 禁言
+ */
+message ForbidSpeak{
+  int32 closeDownType = 1; // 封禁类型 1=封号，2=禁言
+  int32 accountType = 2; // 用户类型 1=openid，2=palyer
+  string startDate = 3; // 开始时间
+  string endDate = 4; // 结束时间
+  string cause = 5; // 封禁原因
+}
+
+/**
+ * 聊天通知
+ */
+message NoticeChatMsgResponse{
+  PlayerSimple sendPlayer = 1; // 发送者信息
+  string msg = 2; // 消息
+  IMGroupEnum group = 3; // 分组 1=全服，2=本服，3=宗门，4=跨服
+  MsgTypeEnum msgType = 4; // 消息类型
+}
+
+/**
+ * 连接聊天频道 请求
+ */
+message JoinImChannelRequest{
+  IMGroupEnum group = 1; // 分组 1=全服，2=本服，3=宗门，4=跨服
+}
+
+/**
+ * 连接聊天频道 响应
+ */
+message JoinImChannelResponse{
+
+}
+
+/**
+ * 退出聊天频道 请求
+ */
+message OutImChannelRequest{
+  IMGroupEnum group = 1; // 分组 1=全服，2=本服，3=宗门，4=跨服
+}
+
+/**
+ * 退出聊天频道 响应
+ */
+message OutImChannelResponse{
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

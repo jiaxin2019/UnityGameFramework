@@ -1,0 +1,13 @@
+syntax = "proto3"; //指定protobuf语法版本
+
+package NKG.NetWork;
+
+message HeartbeatMsgRequest{
+	
+}
+
+
+message HeartbeatMsgResponseBody{
+	optional int64 serverTime = 1;
+}
+
